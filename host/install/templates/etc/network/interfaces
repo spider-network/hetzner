@@ -1,0 +1,21 @@
+## VM configuration
+auto br0
+iface br0 inet static
+  address <%= gateway %>
+  netmask <%= maske %>
+  pre-up brctl addbr br0
+
+<% 0.upto(ips.length) do |i| %>
+  pre-up tunctl -b -u root -t qtap<%= i %>
+  pre-up brctl addif br0 qtap<%= i %>
+  pre-up ifconfig qtap<%= i %> up 0.0.0.0 promisc
+  post-down brctl delif br0 qtap<%= i %>
+  post-down ifconfig qtap<%= i %> down
+<% end %>
+
+  post-down ifconfig br0 down
+  post-down brctl delbr br0
+
+<% ips.each do |ip| %>
+  up route add -host <%= ip %> dev br0
+<% end %>

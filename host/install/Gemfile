@@ -1,0 +1,6 @@
+source :rubygems
+
+gem 'thor', '0.14.6'
+gem 'erubis', '2.7.0'
+gem 'activesupport', '3.1.1'
+gem 'i18n', '0.6.0'
