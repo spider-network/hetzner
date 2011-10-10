@@ -8,7 +8,7 @@ independent systems for development, test, staging and production.
 
 What do you need from Hetzner?
 
-- Root Server from the EX line. _(49€ per month for an [EX4](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 16GB RAM & 2x3TB HDD or 59€ per month for an [EX5](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 24GB RAM & 2x750GB HDD)_
+- Root Server _(49€ per month for an [EX4](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 16GB RAM & 2x3TB HDD or 59€ per month for an [EX5](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 24GB RAM & 2x750GB HDD)_
 - Flexi Pack is necessary to order IP subnet. _(15€ per month)_
 - Subnet /29 _(5.40€ per month)_
 
