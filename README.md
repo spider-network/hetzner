@@ -55,10 +55,10 @@ Hetzner example configuration:
 
 1. Server configuration
 
-    thor hetzner:host:install:configure_authorized_keys
-    thor hetzner:host:install:configure_hostname
-    thor hetzner:host:install:configure_network
-    thor hetzner:host:install:configure_munin
+    - thor hetzner:host:install:configure_authorized_keys
+    - thor hetzner:host:install:configure_hostname
+    - thor hetzner:host:install:configure_network
+    - thor hetzner:host:install:configure_munin
 
 
 Contributing and Support
