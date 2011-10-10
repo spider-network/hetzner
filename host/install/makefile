@@ -11,6 +11,9 @@ install:
 	make fix_postfix
 	make install_git
 	make install_rvm
+	apt-get update
+	apt-get -y upgrade
+	apt-get -y dist-upgrade
 
 install_packages:
 	apt-get update
