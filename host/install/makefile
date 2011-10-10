@@ -14,7 +14,7 @@ install:
 
 install_packages:
 	apt-get update
-	apt-get upgrade
+	apt-get -y upgrade
 	apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities ubuntu-vm-builder qemu-kvm libvirt-bin virt-top virt-manager htop bridge-utils apache2 munin munin-node munin-plugins-extra lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison openjdk-6-jre-headless ant openjdk-6-jdk subversion
 
 install_git:

@@ -36,7 +36,7 @@ Hetzner example configuration:
 
 1. Download and extract the setup script (The path must be "/root/hetzner")
 
-    wget https://raw.github.com/spider-network/hetzner/master/tarball/hetzner.tar.gz && tar xvf hetzner.tar.gz
+    wget http://www.spider-network.net/downloads/hetzner.tar.gz && tar xvf hetzner.tar.gz
 
 1. Start the installation
 
