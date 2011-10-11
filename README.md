@@ -27,7 +27,9 @@ Hetzner example configuration:
     Broadcast: 79.48.232.15
 
     Available IP addresses:
-    79.48.232.9 bis 79.48.232.14
+    79.48.232.9 bis 79.48.232.14 
+
+One of the available IP addresses "79.48.232.14" will be used for the Gateway configuration.
 
 #### Install steps:
 1. Login via SSH
@@ -52,6 +54,28 @@ Hetzner example configuration:
 
     cp /root/hetzner/config.yml.example /root/hetzner/config.yml
     vi /root/hetzner/config.yml
+    
+        server:
+          host:
+            ip: 177.10.0.8
+            hostname: server-001.domain.tpl
+            subnet:
+              ip: 79.48.232.8
+              maske: 255.255.255.248
+              broadcast: 79.48.232.15
+              gateway: 79.48.232.14
+              ips:
+                - 79.48.232.9
+                - 79.48.232.10
+                - 79.48.232.11
+                - 79.48.232.12
+                - 79.48.232.13
+            ssh_authorized_keys:
+              - ssh-dss AAAAB3NzaC1kc3MAAAEBAL...i2F8kYXpcz== michael@voigt
+            tools:
+                munin:
+                  htpasswd: Munin:1$vftlsa29t6M
+
 
 1. Server configuration
 
