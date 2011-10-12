@@ -27,63 +27,49 @@ Hetzner example configuration:
     Broadcast: 79.48.232.15
 
     Available IP addresses:
-    79.48.232.9 bis 79.48.232.14 
-
-One of the available IP addresses "79.48.232.14" will be used for the Gateway configuration.
+    79.48.232.9 bis 79.48.232.14
 
 #### Install steps:
 1. Login via SSH
 
-    ssh root@177.10.0.8 -A
+    ``ssh root@177.10.0.8 -A``
+
+1. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
+will take at least 15 minutes.
+
+    ``apt-get update && apt-get -y install screen``
+
+    - ``screen``: Start a new screen session. Detach the session with ``ctrl+a d``
+    - ``screen -r``: Reattach to a detached screen process.
+    
 
 1. Download and extract the setup script (The path must be "/root/hetzner")
 
-    wget http://www.spider-network.net/downloads/hetzner.tar.gz && tar xvf hetzner.tar.gz
+    ``wget http://www.spider-network.net/downloads/hetzner.tar.gz && tar xvf hetzner.tar.gz``
 
 1. Start the installation
 
-    cd /root/hetzner/host/install && make install
+    ``cd /root/hetzner/host/install && make install``
 
     After the installation, you have to logout and login again.
 
 1. Install missing Gem-Packages
 
-    cd /root/hetzner/host/install && bundle install
+    ``cd /root/hetzner/host/install && bundle install``
 
 1. Edit used yaml configuration
 
-    cp /root/hetzner/config.yml.example /root/hetzner/config.yml
-    vi /root/hetzner/config.yml
-    
-        server:
-          host:
-            ip: 177.10.0.8
-            hostname: server-001.domain.tpl
-            subnet:
-              ip: 79.48.232.8
-              maske: 255.255.255.248
-              broadcast: 79.48.232.15
-              gateway: 79.48.232.14
-              ips:
-                - 79.48.232.9
-                - 79.48.232.10
-                - 79.48.232.11
-                - 79.48.232.12
-                - 79.48.232.13
-            ssh_authorized_keys:
-              - ssh-dss AAAAB3NzaC1kc3MAAAEBAL...i2F8kYXpcz== michael@voigt
-            tools:
-                munin:
-                  htpasswd: Munin:1$vftlsa29t6M
-
+    ``cp /root/hetzner/config.yml.example /root/hetzner/config.yml``
+    ``vi /root/hetzner/config.yml``
 
 1. Server configuration
 
-    - thor hetzner:host:install:configure_authorized_keys
-    - thor hetzner:host:install:configure_hostname
-    - thor hetzner:host:install:configure_network
-    - thor hetzner:host:install:configure_munin
+    - ``thor hetzner:host:install:configure_authorized_keys``
+    - ``thor hetzner:host:install:configure_hostname``
+    - ``thor hetzner:host:install:configure_network``
+    - ``thor hetzner:host:install:configure_munin``
 
+#### Create VM:
 
 Contributing and Support
 ------------------------
