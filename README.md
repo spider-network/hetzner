@@ -140,6 +140,16 @@ will take at least 15 minutes.
 
     ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
 
+TODO's
+------
+- create a makefile to setup the VM itself
+    - rvm
+    - apache & passenger
+    - git
+    - sphinx
+	- redis
+	- mongodb
+
 Contributing and Support
 ------------------------
 If you have any suggestions or criticism write me an e-mail [michael.voigt@spider-network.net](mailto:michael.voigt@spider-network.net)
