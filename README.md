@@ -60,7 +60,34 @@ will take at least 15 minutes.
 1. Edit used yaml configuration
 
     ``cp /root/hetzner/config.yml.example /root/hetzner/config.yml``
+    
     ``vi /root/hetzner/config.yml``
+    
+    Example:
+    <pre>
+    server:
+      host:
+        ip: 177.10.0.8
+        hostname: server-001.domain.tpl
+        subnet:
+          ip: 79.48.232.8
+          maske: 255.255.255.248
+          broadcast: 79.48.232.15
+          net: 177.10.0.0
+          gateway: 79.48.232.14
+          dns: '213.133.98.98 213.133.99.99 213.133.100.100'
+          ips:
+            - 79.48.232.9
+            - 79.48.232.10
+            - 79.48.232.11
+            - 79.48.232.12
+            - 79.48.232.13
+        ssh_authorized_keys:
+          - ssh-dss AAAAB3NzaC1kc3MAAAEB.../MEwJ7i2F8kYXpcz== michael@voigt
+        tools:
+          munin:
+            htpasswd: Munin:1$vftlsa29t6M
+    </pre>
 
 1. Server configuration
 
