@@ -4,7 +4,7 @@ SERVER_CONFIG_VENDOR_DIR = $(SERVER_CONFIG_DIR)/host/install/vendor
 
 # Programm versions
 GIT_VERSION = 1.7.7
-RVM_VERSION = 0.0.84
+RVM_VERSION = 1.8.5
 
 install:
 	make install_packages
@@ -28,12 +28,10 @@ install_git:
 install_rvm:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf rvm-$(RVM_VERSION).tar.gz
 	cd $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION) && ./install
-	cp $(SERVER_CONFIG_VENDOR_DIR)/ruby-1.9.2-p290.tar.gz /usr/local/rvm/archives/
-	cp $(SERVER_CONFIG_VENDOR_DIR)/rubygems-1.8.10.tgz /usr/local/rvm/archives/
-	cp $(SERVER_CONFIG_VENDOR_DIR)/yaml-0.1.4.tar.gz /usr/local/rvm/archives/
-	rvm install 1.9.2-p290
-	rvm 1.9.2-p290 --default
-	gem install bundler --no-rdoc --no-ri
+	/usr/local/rvm/bin/rvm install 1.9.2-p290
+	/usr/local/rvm/bin/rvm 1.9.2-p290 --default
+	/usr/local/rvm/bin/rvm gem install bundler --no-rdoc --no-ri
+	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION)
 
 fix_postfix:
 	# Bug: https://bugs.launchpad.net/ubuntu/+source/postfix/+bug/42947/comments/27
