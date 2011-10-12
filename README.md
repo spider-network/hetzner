@@ -98,7 +98,7 @@ will take at least 15 minutes.
 
 #### Create and manage VM's:
 
-- Create a new VM
+- Create a new VM (It can take up to 20 minutes. I recommend to run the command also inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
 
     ``thor hetzner:host:vm:create --ip=79.48.232.9 --name=vm-001 --user-pass=password``
 
