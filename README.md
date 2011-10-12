@@ -96,7 +96,37 @@ will take at least 15 minutes.
     - ``thor hetzner:host:install:configure_network``
     - ``thor hetzner:host:install:configure_munin``
 
-#### Create VM:
+#### Create and manage VM's:
+
+- Create a new VM
+
+    ``thor hetzner:host:vm:create --ip=79.48.232.9 --name=vm-001 --user-pass=password``
+
+- Show all VM's and the status (running, shut off)
+
+    ``thor hetzner:host:vm:list``
+
+- Stop the given VM
+
+    ``thor hetzner:host:vm:stop --name=vm-001``
+
+- Start the given VM
+
+    ``thor hetzner:host:vm:start --name=vm-001``
+
+- Create a backup (dump)
+
+    ``thor hetzner:host:vm:backup --name=vm-001``
+
+- Show all backups from the given VM
+
+    ``thor hetzner:host:vm:backups --name=vm-001``
+
+- Restore the VM from backup dump
+
+    ``thor hetzner:host:vm:stop --name=vm-001``
+
+    ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
 
 Contributing and Support
 ------------------------
