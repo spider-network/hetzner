@@ -88,5 +88,99 @@ module Hetzner
         end
       end
     end
+
+    class Vm < Thor
+      include Helpers
+
+      desc "create", "create a new VM"
+      method_options(
+        :name      => :required, # e.g. vm-001
+        :user_name => 'server',
+        :user_pass => :required, # e.g. NE36D2
+        :ip        => :required, # e.g. 79.48.232.9
+        :cpus      => 4,
+        :ram       => 4096,
+        :swap      => 1024,
+        :hdd       => 20480
+      )
+      def create
+        FileUtils.mkdir_p('/root/vms', :verbose => true)
+        if File.exists?("/root/vms/#{options[:name]}")
+          say("Folder '/root/vms/#{options[:name]}' already exists.", Color::RED); exit
+        end
+
+        vm_network_gateway  = config['server']['host']['subnet']['gateway']   # e.g. 79.48.232.14
+        vm_network_mask     = config['server']['host']['subnet']['maske']     # e.g. 255.255.255.248
+        vm_network_net      = config['server']['host']['subnet']['net']       # e.g. 176.9.0.0
+        vm_network_bcast    = config['server']['host']['subnet']['broadcast'] # e.g. 176.9.0.31
+        vm_network_dns      = config['server']['host']['subnet']['dns']       # e.g. '213.133.98.98 213.133.99.99 213.133.100.100'
+
+        cmd_create_vm = %{ubuntu-vm-builder kvm lucid -v  \
+          --cpus=#{options[:cpus]} \
+          --mem=#{options[:ram]} \
+          --swapsize=#{options[:swap]} \
+          --rootsize=#{options[:hdd]} \
+          --bridge=br0 \
+          --libvirt=qemu:///system \
+          --flavour=server \
+          --hostname=#{options[:name]} \
+          --ip=#{options[:ip]} \
+          --mask=#{vm_network_mask} \
+          --net=#{vm_network_net} \
+          --bcast=#{vm_network_bcast} \
+          --gw=#{vm_network_gateway} \
+          --dns=#{vm_network_dns} \
+          --mirror=http://de.archive.ubuntu.com/ubuntu \
+          --components='main,universe' \
+          --addpkg='openssh-server,acpid,htop' \
+          --user=#{options[:user_name]} \
+          --pass=#{options[:user_pass]} \
+          --timezone='CET' \
+          --dest=/root/vms/#{options[:name]}}
+
+        system(cmd_create_vm)
+        system("virsh autostart #{options[:name]}")
+        system("virsh start #{options[:name]}")
+        system('virsh -c qemu:///system list --all')
+      end
+
+      desc "list", "show list of all VM's"
+      def list
+        system('virsh -c qemu:///system list --all')
+      end
+
+      desc "start", "start the given VM"
+      method_options(:name => :required)
+      def start
+        system("virsh start #{options[:name]}")
+      end
+
+      desc "stop", "stop the given VM"
+      method_options(:name => :required)
+      def stop
+        system("virsh shutdown #{options[:name]}")
+      end
+
+      desc "backup", "backup the given VM"
+      method_options(:name => :required)
+      def backup
+        FileUtils.mkdir_p("/root/backups/vms/#{options[:name]}")
+        system("virsh save #{options[:name]} /root/backups/vms/#{options[:name]}/vm#{backup_file_suffix}")
+        invoke :start
+      end
+
+      desc "backups", "get list of backups for the given VM"
+      method_options(:name => :required)
+      def backups
+        FileUtils.mkdir_p("/root/backups/vms/#{options[:name]}")
+        system("ls -lh /root/backups/vms/#{options[:name]}/")
+      end
+
+      desc "restore", "restore the given VM dump"
+      method_options(:name => :required, :file => :required)
+      def restore
+        system("virsh restore /root/backups/vms/#{options[:name]}/#{options[:file]}")
+      end
+    end
   end
 end
