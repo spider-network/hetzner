@@ -102,6 +102,18 @@ will take at least 15 minutes.
 
     ``thor hetzner:host:vm:create --ip=79.48.232.9 --name=vm-001 --user-pass=password``
 
+    Options:
+    <pre>
+    :name      => :required, # Name of the VM. e.g. vm-001
+    :user_name => 'server',  # Linux user (Default: server)
+    :user_pass => :required, # Password for the Linux user
+    :ip        => :required, # VM IP, one of the available IP's from your subnet. e.g. 79.48.232.9
+    :cpus      => 4,         # VM CPU cores (Default: 4)
+    :ram       => 4096,      # VM RAM (Default: 4096 MB)
+    :swap      => 1024,      # VM Swap (Default: 1024 MB)
+    :hdd       => 20480      # VM HDD (Default: 20480 MB)
+    </pre>
+
 - Show all VM's and the status (running, shut off)
 
     ``thor hetzner:host:vm:list``
