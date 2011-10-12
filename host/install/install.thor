@@ -115,7 +115,7 @@ module Hetzner
         vm_network_bcast    = config['server']['host']['subnet']['broadcast'] # e.g. 176.9.0.31
         vm_network_dns      = config['server']['host']['subnet']['dns']       # e.g. '213.133.98.98 213.133.99.99 213.133.100.100'
 
-        cmd_create_vm = %{ubuntu-vm-builder kvm lucid -v  \
+        shell_cmd = %{ubuntu-vm-builder kvm lucid -v  \
           --cpus=#{options[:cpus]} \
           --mem=#{options[:ram]} \
           --swapsize=#{options[:swap]} \
@@ -137,49 +137,60 @@ module Hetzner
           --pass=#{options[:user_pass]} \
           --timezone='CET' \
           --dest=/root/vms/#{options[:name]}}
+        puts(shell_cmd); system(shell_cmd)
 
-        system(cmd_create_vm)
-        system("virsh autostart #{options[:name]}")
-        system("virsh start #{options[:name]}")
-        system('virsh -c qemu:///system list --all')
+        shell_cmd = "virsh autostart #{options[:name]}"
+        puts(shell_cmd); system(shell_cmd)
+
+        shell_cmd = "virsh start #{options[:name]}"
+        puts(shell_cmd); system(shell_cmd)
+
+        shell_cmd = 'virsh -c qemu:///system list --all'
+        puts(shell_cmd); system(shell_cmd)
       end
 
       desc "list", "show list of all VM's"
       def list
-        system('virsh -c qemu:///system list --all')
+        shell_cmd = 'virsh -c qemu:///system list --all'
+        puts(shell_cmd); system(shell_cmd)
       end
 
       desc "start", "start the given VM"
       method_options(:name => :required)
       def start
-        system("virsh start #{options[:name]}")
+        shell_cmd = "virsh start #{options[:name]}"
+        puts(shell_cmd); system(shell_cmd)
       end
 
       desc "stop", "stop the given VM"
       method_options(:name => :required)
       def stop
-        system("virsh shutdown #{options[:name]}")
+        shell_cmd = "virsh shutdown #{options[:name]}"
+        puts(shell_cmd); system(shell_cmd)
       end
 
       desc "backup", "backup the given VM"
       method_options(:name => :required)
       def backup
-        FileUtils.mkdir_p("/root/backups/vms/#{options[:name]}")
-        system("virsh save #{options[:name]} /root/backups/vms/#{options[:name]}/vm#{backup_file_suffix}")
+        FileUtils.mkdir_p("/root/backups/vms/#{options[:name]}", :verbose => true)
+        shell_cmd = "virsh save #{options[:name]} /root/backups/vms/#{options[:name]}/vm#{backup_file_suffix}"
+        puts(shell_cmd); system(shell_cmd)
         invoke :start
       end
 
       desc "backups", "get list of backups for the given VM"
       method_options(:name => :required)
       def backups
-        FileUtils.mkdir_p("/root/backups/vms/#{options[:name]}")
-        system("ls -lh /root/backups/vms/#{options[:name]}/")
+        FileUtils.mkdir_p("/root/backups/vms/#{options[:name]}", :verbose => true)
+        shell_cmd = "ls -lh /root/backups/vms/#{options[:name]}/"
+        puts(shell_cmd); system(shell_cmd)
       end
 
       desc "restore", "restore the given VM dump"
       method_options(:name => :required, :file => :required)
       def restore
-        system("virsh restore /root/backups/vms/#{options[:name]}/#{options[:file]}")
+        shell_cmd = "virsh restore /root/backups/vms/#{options[:name]}/#{options[:file]}"
+        puts(shell_cmd); system(shell_cmd)
       end
     end
   end
