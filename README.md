@@ -41,11 +41,11 @@ will take at least 15 minutes.
 
     - ``screen``: Start a new screen session. Detach the session with ``ctrl+a d``
     - ``screen -r``: Reattach to a detached screen process.
-    
+
 
 1. Download and extract the setup script (The path must be "/root/hetzner")
 
-    ``wget http://www.spider-network.net/downloads/hetzner.tar.gz && tar xvf hetzner.tar.gz``
+    ``wget http://www.spider-network.net/downloads/hetzner-host.tar.gz && tar xvf hetzner-host.tar.gz``
 
 1. Start the installation
 
@@ -59,10 +59,10 @@ will take at least 15 minutes.
 
 1. Edit used yaml configuration
 
-    ``cp /root/hetzner/config.yml.example /root/hetzner/config.yml``
-    
+    ``cp /root/hetzner/host/install/config.yml.example /root/hetzner/host/install/config.yml``
+
     ``vi /root/hetzner/config.yml``
-    
+
     Example:
     <pre>
     server:

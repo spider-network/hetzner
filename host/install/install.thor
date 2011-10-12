@@ -11,7 +11,7 @@ module Hetzner
     end
 
     def config
-      YAML.load_file(File.join(SERVER_CONFIG_DIR, 'config.yml'))
+      YAML.load_file(File.join(SERVER_CONFIG_DIR, 'host', 'install', 'config.yml'))
     end
   end
 
@@ -132,7 +132,7 @@ module Hetzner
           --dns=#{vm_network_dns} \
           --mirror=http://de.archive.ubuntu.com/ubuntu \
           --components='main,universe' \
-          --addpkg='openssh-server,acpid,htop' \
+          --addpkg='openssh-server,acpid,htop,wget' \
           --user=#{options[:user_name]} \
           --pass=#{options[:user_pass]} \
           --timezone='CET' \
