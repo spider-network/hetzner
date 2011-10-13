@@ -18,7 +18,7 @@ install:
 install_packages:
 	apt-get update
 	apt-get -y upgrade
-	apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities ubuntu-vm-builder qemu-kvm libvirt-bin virt-top virt-manager htop bridge-utils apache2 munin munin-node munin-plugins-extra lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison vim
+	apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities ubuntu-vm-builder qemu-kvm libvirt-bin virt-top virt-manager htop bridge-utils apache2 munin munin-node munin-plugins-extra lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison vim sysstat
 
 install_git:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf git-$(GIT_VERSION).tar.gz
@@ -32,6 +32,7 @@ install_rvm:
 	/usr/local/rvm/bin/rvm 1.9.2-p290 --default
 	/usr/local/rvm/bin/rvm gem install bundler --no-rdoc --no-ri
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION)
+	. /etc/profile.d/rvm.sh
 
 fix_postfix:
 	# Bug: https://bugs.launchpad.net/ubuntu/+source/postfix/+bug/42947/comments/27

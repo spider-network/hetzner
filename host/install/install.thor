@@ -132,7 +132,7 @@ module Hetzner
           --dns=#{vm_network_dns} \
           --mirror=http://de.archive.ubuntu.com/ubuntu \
           --components='main,universe' \
-          --addpkg='openssh-server,acpid,htop,wget' \
+          --addpkg='openssh-server,acpid,htop,wget,screen' \
           --user=#{options[:user_name]} \
           --pass=#{options[:user_pass]} \
           --timezone='CET' \
@@ -146,6 +146,13 @@ module Hetzner
         puts(shell_cmd); system(shell_cmd)
 
         shell_cmd = 'virsh -c qemu:///system list --all'
+        puts(shell_cmd); system(shell_cmd)
+      end
+
+      desc "edit", "edit the given VM"
+      method_options(:name => :required)
+      def edit
+        shell_cmd = "virsh edit #{options[:name]}"
         puts(shell_cmd); system(shell_cmd)
       end
 
