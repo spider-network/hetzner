@@ -140,15 +140,27 @@ will take at least 15 minutes.
 
     ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
 
+#### Install VM environment
+
+1. Login via SSH
+
+    ``ssh server@79.48.232.9 -A``
+
+1. Download and extract the setup script (The path must be "~/hetzner")
+
+    ``wget http://www.spider-network.net/downloads/hetzner-vm.tar.gz && tar xvf hetzner-vm.tar.gz``
+
+1. Start the installation
+
+    ``cd ~/hetzner/host/install && make install``
+
+    After the installation, you have to logout and login again.
+
 TODO's
 ------
 - create a makefile to setup the VM itself
-    - rvm
+    - monit
     - apache & passenger
-    - git
-    - sphinx
-	- redis
-	- mongodb
 
 Contributing and Support
 ------------------------
