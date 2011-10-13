@@ -113,6 +113,18 @@ will take at least 15 minutes.
     :swap      => 1024,      # VM Swap (Default: 1024 MB)
     :hdd       => 20480      # VM HDD (Default: 20480 MB)
     </pre>
+    
+    Increase IO performance (add: ``cache='writeback'``):
+    
+    ``thor hetzner:host:vm:edit --name=vm-001``
+    
+    ```xml
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2' cache='writeback'/>
+      <source file='/root/vms/vm-002/tmphJhs3T.qcow2'/>
+      <target dev='hda' bus='ide'/>
+    </disk>
+    ```
 
 - Show all VM's and the status (running, shut off)
 
