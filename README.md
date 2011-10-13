@@ -168,6 +168,10 @@ will take at least 15 minutes.
     ``cd ~/hetzner/vm/install && make install``
 
     After the installation, you have to logout and login again.
+    
+1. Install Phusion Passenger
+
+    ``passenger-install-apache2-module``
 
 TODO's
 ------
