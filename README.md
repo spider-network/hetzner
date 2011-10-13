@@ -165,7 +165,7 @@ will take at least 15 minutes.
 
 1. Start the installation
 
-    ``cd ~/hetzner/host/install && make install``
+    ``cd ~/hetzner/vm/install && make install``
 
     After the installation, you have to logout and login again.
 
