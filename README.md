@@ -102,7 +102,7 @@ will take at least 15 minutes.
 
     ``thor hetzner:host:vm:create --ip=79.48.232.9 --name=vm-001 --user-pass=password``
 
-    Options:
+    - Options:
     <pre>
     :name      => :required, # Name of the VM. e.g. vm-001
     :user_name => 'server',  # Linux user (Default: server)
@@ -114,17 +114,18 @@ will take at least 15 minutes.
     :hdd       => 20480      # VM HDD (Default: 20480 MB)
     </pre>
     
-    Increase IO performance (add: ``cache='writeback'``):
+    - Increase IO performance (add: ``cache='writeback'``):
     
-    ``thor hetzner:host:vm:edit --name=vm-001``
+        ``thor hetzner:host:vm:edit --name=vm-001``
     
-    ```xml
-    <disk type='file' device='disk'>
-      <driver name='qemu' type='qcow2' cache='writeback'/>
-      <source file='/root/vms/vm-002/tmphJhs3T.qcow2'/>
-      <target dev='hda' bus='ide'/>
-    </disk>
-    ```
+        ```xml
+        <disk type='file' device='disk'>
+          <driver name='qemu' type='qcow2' cache='writeback'/>
+          <source file='/root/vms/vm-002/tmphJhs3T.qcow2'/>
+          <target dev='hda' bus='ide'/>
+        </disk>
+        ```
+        Don't forget to restart the VM.
 
 - Show all VM's and the status (running, shut off)
 
