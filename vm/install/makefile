@@ -8,6 +8,7 @@ RVM_VERSION = 1.8.5
 SPHINX_VERSION = 0.9.9
 REDIS_VERSION = 2.2.14
 MONGODB_VERSION = 2.0.0
+MEMCACHED_VERSION = 1.4.8
 
 install:
 	make install_packages
@@ -15,12 +16,13 @@ install:
 	make install_sphinx
 	make install_redis
 	make install_mongodb
+	make install_memcached
 	make install_rvm
 
 install_packages:
 	sudo apt-get update
 	sudo apt-get -y upgrade
-	sudo apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities htop bridge-utils apache2 apache2-prefork-dev libapr1-dev libaprutil1-dev lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison openjdk-6-jre-headless ant openjdk-6-jdk subversion vim sendmail wget monit tcsh scons libpcre++-dev libboost-dev xulrunner-1.9.2-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev libboost-date-time-dev mysql-server libmysqlclient-dev php5 php5-mysql tcl8.5 sysstat
+	sudo apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities htop bridge-utils apache2 apache2-prefork-dev libapr1-dev libaprutil1-dev lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison openjdk-6-jre-headless ant openjdk-6-jdk subversion vim sendmail wget monit tcsh scons libpcre++-dev libboost-dev xulrunner-1.9.2-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev libboost-date-time-dev mysql-server libmysqlclient-dev php5 php5-mysql tcl8.5 sysstat libevent-dev
 	sudo apt-get -y upgrade
 	sudo apt-get -y dist-upgrade
 
@@ -44,6 +46,11 @@ install_mongodb:
 	sudo cp $(SERVER_CONFIG_VENDOR_DIR)/mongodb-linux-x86_64-$(MONGODB_VERSION)/bin/* /usr/local/bin/
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/mongodb-linux-x86_64-$(MONGODB_VERSION)
 	sudo mkdir -p /data/db/
+
+install_memcached:
+	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf memcached-$(MEMCACHED_VERSION).tar.gz
+	cd $(SERVER_CONFIG_VENDOR_DIR)/memcached-$(MEMCACHED_VERSION) && ./configure && make && sudo make install
+	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/memcached-$(MEMCACHED_VERSION)
 
 install_rvm:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf rvm-$(RVM_VERSION).tar.gz
