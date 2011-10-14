@@ -1,2 +1,3 @@
 .DS_Store
-config.yml
+host/install/config.yml
+vm/install/config.yml
