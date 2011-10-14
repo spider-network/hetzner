@@ -113,11 +113,11 @@ will take at least 15 minutes.
     :swap      => 1024,      # VM Swap (Default: 1024 MB)
     :hdd       => 20480      # VM HDD (Default: 20480 MB)
     </pre>
-    
+
     - Increase IO performance (add: ``cache='writeback'``):
-    
+
         ``thor hetzner:host:vm:edit --name=vm-001``
-    
+
         ```xml
         <disk type='file' device='disk'>
           <driver name='qemu' type='qcow2' cache='writeback'/>
@@ -168,7 +168,7 @@ will take at least 15 minutes.
     ``cd ~/hetzner/vm/install && make install``
 
     After the installation, you have to logout and login again.
-    
+
 1. Install Phusion Passenger
 
     ``passenger-install-apache2-module``

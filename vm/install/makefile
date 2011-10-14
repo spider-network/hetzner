@@ -20,7 +20,7 @@ install:
 install_packages:
 	sudo apt-get update
 	sudo apt-get -y upgrade
-	sudo apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities htop bridge-utils apache2 lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison openjdk-6-jre-headless ant openjdk-6-jdk subversion vim sendmail wget monit tcsh scons libpcre++-dev libboost-dev xulrunner-1.9.2-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev libboost-date-time-dev mysql-server libmysqlclient-dev php5 php5-mysql tcl8.5 sysstat
+	sudo apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities htop bridge-utils apache2 apache2-prefork-dev libapr1-dev libaprutil1-dev lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison openjdk-6-jre-headless ant openjdk-6-jdk subversion vim sendmail wget monit tcsh scons libpcre++-dev libboost-dev xulrunner-1.9.2-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev libboost-date-time-dev mysql-server libmysqlclient-dev php5 php5-mysql tcl8.5 sysstat
 	sudo apt-get -y upgrade
 	sudo apt-get -y dist-upgrade
 
@@ -48,9 +48,8 @@ install_mongodb:
 install_rvm:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf rvm-$(RVM_VERSION).tar.gz
 	cd $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION) && ./install
-	/usr/local/rvm/bin/rvm install 1.9.2-p290
-	/usr/local/rvm/bin/rvm 1.9.2-p290 --default
-	/usr/local/rvm/bin/rvm gem install bundler --no-rdoc --no-ri
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION)
-	. /etc/profile.d/rvm.sh
-	gem install passenger
+	~/.rvm/bin/rvm install 1.9.2-p290
+	~/.rvm/bin/rvm 1.9.2-p290 --default
+	~/.rvm/bin/rvm gem install bundler --no-rdoc --no-ri
+	~/.rvm/bin/rvm gem install passenger --no-rdoc --no-ri

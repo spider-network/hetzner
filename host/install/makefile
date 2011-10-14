@@ -32,7 +32,6 @@ install_rvm:
 	/usr/local/rvm/bin/rvm 1.9.2-p290 --default
 	/usr/local/rvm/bin/rvm gem install bundler --no-rdoc --no-ri
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION)
-	. /etc/profile.d/rvm.sh
 
 fix_postfix:
 	# Bug: https://bugs.launchpad.net/ubuntu/+source/postfix/+bug/42947/comments/27
