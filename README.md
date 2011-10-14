@@ -89,7 +89,7 @@ will take at least 15 minutes.
             htpasswd: Munin:1$vftlsa29t6M
     </pre>
 
-1. Server configuration
+1. Server configuration (``cd /root/hetzner/host/install``)
 
     - ``thor hetzner:host:install:configure_authorized_keys``
     - ``thor hetzner:host:install:configure_hostname``
@@ -98,7 +98,7 @@ will take at least 15 minutes.
 
 #### Create and manage VM's:
 
-- Create a new VM (It can take up to 20 minutes. I recommend to run the command also inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
+- Create a new VM (It can take up to 20 minutes. I recommend to do this inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
 
     ``thor hetzner:host:vm:create --ip=79.48.232.9 --name=vm-001 --user-pass=password``
 
@@ -163,7 +163,7 @@ will take at least 15 minutes.
 
     ``wget http://www.spider-network.net/downloads/hetzner-vm.tar.gz && tar xvf hetzner-vm.tar.gz``
 
-1. Start the installation
+1. Start the installation (I recommend to do this inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
 
     ``cd ~/hetzner/vm/install && make install``
 
@@ -172,12 +172,6 @@ will take at least 15 minutes.
 1. Install Phusion Passenger
 
     ``passenger-install-apache2-module``
-
-TODO's
-------
-- create a makefile to setup the VM itself
-    - monit
-    - apache & passenger
 
 Contributing and Support
 ------------------------
