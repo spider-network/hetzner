@@ -57,6 +57,18 @@ install_rvm:
 	cd $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION) && ./install
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION)
 	~/.rvm/bin/rvm install 1.9.2-p290
-	~/.rvm/bin/rvm 1.9.2-p290 --default
+	~/.rvm/bin/rvm install ree
+	~/.rvm/bin/rvm ree --default
 	~/.rvm/bin/rvm gem install bundler --no-rdoc --no-ri
-	~/.rvm/bin/rvm gem install passenger --no-rdoc --no-ri
+
+configure_apache:
+	sudo cp $(SERVER_CONFIG_VENDOR_DIR)/../templates/etc/apache2/sites-available/rails-application /etc/apache2/sites-available/rails-application
+	sudo rm /etc/apache2/sites-enabled/000-default
+	cd /etc/apache2/sites-enabled/ && sudo ln -s /etc/apache2/sites-available/rails-application rails-application
+	sudo /etc/init.d/apache2 stop && sudo /etc/init.d/apache2 start
+	mkdir -p ~/rails-application
+
+
+
+
+

@@ -169,9 +169,23 @@ will take at least 15 minutes.
 
     After the installation, you have to logout and login again.
 
+1. Install missing Gem-Packages
+
+    ``cd ~/hetzner/vm/install && bundle install``
+
 1. Install Phusion Passenger
 
     ``passenger-install-apache2-module``
+
+1. Define rails environment
+
+    ``echo 'export RAILS_ENV=production' >> ~/.bashrc``
+
+1. Adapt Apache configuration
+
+    ``cd ~/hetzner/vm/install && make configure_apache``
+
+Then you can deploy your Rails application to ``~/rails-application/current/``.
 
 Contributing and Support
 ------------------------
