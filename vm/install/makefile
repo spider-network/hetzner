@@ -1,6 +1,7 @@
 # Folders
 SERVER_CONFIG_DIR = ~/hetzner
 SERVER_CONFIG_VENDOR_DIR = $(SERVER_CONFIG_DIR)/vm/install/vendor
+SERVER_CONFIG_TEMPLATE_DIR = $(SERVER_CONFIG_DIR)/vm/install/templates
 
 # Programm versions
 GIT_VERSION = 1.7.7
@@ -62,11 +63,21 @@ install_rvm:
 	~/.rvm/bin/rvm gem install bundler --no-rdoc --no-ri
 
 configure_apache:
-	sudo cp $(SERVER_CONFIG_VENDOR_DIR)/../templates/etc/apache2/sites-available/rails-application /etc/apache2/sites-available/rails-application
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/apache2/sites-available/rails-application /etc/apache2/sites-available/rails-application
 	sudo rm /etc/apache2/sites-enabled/000-default
 	cd /etc/apache2/sites-enabled/ && sudo ln -s /etc/apache2/sites-available/rails-application rails-application
 	sudo /etc/init.d/apache2 stop && sudo /etc/init.d/apache2 start
 	mkdir -p ~/rails-application
+
+configure_monit:
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/mysql/conf.d/pid.cnf /etc/mysql/conf.d/pid.cnf
+	sudo /etc/init.d/mysql stop && sudo /etc/init.d/mysql start
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/monit/monitrc /etc/monit/monitrc
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/monit/conf.d/* /etc/monit/conf.d/
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/default/monit /etc/default/monit
+	sudo /etc/init.d/monit stop && sudo /etc/init.d/monit start
+	sudo monit monitor all
+	sudo monit summary
 
 
 

@@ -1,0 +1,2 @@
+[mysqld]
+pid-file = /var/run/mysqld/mysqld.pid

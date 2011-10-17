@@ -1,0 +1,4 @@
+# set mailserver smtp.domain.tpl port 25
+#     username "error@domain.tpl" password "secure"
+#
+# set alert error@domain.tpl
