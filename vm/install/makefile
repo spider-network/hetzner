@@ -10,7 +10,6 @@ SPHINX_VERSION = 0.9.9
 REDIS_VERSION = 2.4.1
 MONGODB_VERSION = 2.0.0
 MEMCACHED_VERSION = 1.4.8
-MONIT_VERSION = 5.3
 
 install:
 	make install_packages
@@ -20,7 +19,6 @@ install:
 	make install_mongodb
 	make install_memcached
 	make install_rvm
-	make install_monit
 
 install_packages:
 	sudo apt-get update
@@ -63,13 +61,6 @@ install_rvm:
 	~/.rvm/bin/rvm install ree
 	~/.rvm/bin/rvm ree --default
 	~/.rvm/bin/rvm gem install bundler --no-rdoc --no-ri
-
-install_monit:
-	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf monit-$(MONIT_VERSION).tar.gz
-	cd $(SERVER_CONFIG_VENDOR_DIR)/monit-$(MONIT_VERSION) && ./configure --sysconfdir=/etc/monit/ && make && sudo make install
-	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/monit-$(MONIT_VERSION)
-	sudo monit quit
-	sudo monit
 
 configure_apache:
 	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/apache2/sites-available/rails-application /etc/apache2/sites-available/rails-application
