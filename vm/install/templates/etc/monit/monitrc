@@ -1,5 +1,6 @@
 # Monit configuration
 set daemon 30
+    with start delay 120
 
 set httpd port 2812
   allow localhost
