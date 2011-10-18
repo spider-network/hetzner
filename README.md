@@ -184,6 +184,10 @@ will take at least 15 minutes.
 1. Adapt Apache configuration
 
     ``cd ~/hetzner/vm/install && make configure_apache``
+    
+1. Configure Monit
+
+    ``cd ~/hetzner/vm/install && make configure_monit``
 
 Then you can deploy your Rails application to ``~/rails-application/current/``.
 
