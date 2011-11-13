@@ -59,7 +59,7 @@ install_rvm:
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION)
 	~/.rvm/bin/rvm install 1.9.2-p290
 	~/.rvm/bin/rvm install ree
-	~/.rvm/bin/rvm ree --default
+	~/.rvm/bin/rvm 1.9.2-p290 --default
 	~/.rvm/bin/rvm gem install bundler --no-rdoc --no-ri
 
 configure_apache:
