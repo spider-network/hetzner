@@ -193,7 +193,7 @@ will take at least 15 minutes.
 
     <pre>
     # File: ~/.bashrc
-    export MONGOID_HOST=host
+    export MONGOID_HOST=localhost
     export MONGOID_PORT=27017
     export MONGOID_USERNAME=user
     export MONGOID_PASSWORD=pass
