@@ -184,10 +184,20 @@ will take at least 15 minutes.
 1. Adapt Apache configuration
 
     ``cd ~/hetzner/vm/install && make configure_apache``
-    
+
 1. Configure Monit
 
     ``cd ~/hetzner/vm/install && make configure_monit``
+
+1. Config MongoDB credentials
+
+    <pre>
+    echo 'export MONGOID_HOST=host' >> ~/.bashrc
+    echo 'export MONGOID_PORT=27017' >> ~/.bashrc
+    echo 'export MONGOID_USERNAME=user' >> ~/.bashrc
+    echo 'export MONGOID_PASSWORD=pass' >> ~/.bashrc
+    echo 'export MONGOID_DATABASE=db' >> ~/.bashrc
+    </pre>
 
 Then you can deploy your Rails application to ``~/rails-application/current/``.
 
