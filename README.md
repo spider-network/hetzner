@@ -192,11 +192,12 @@ will take at least 15 minutes.
 1. Config MongoDB credentials
 
     <pre>
-    echo 'export MONGOID_HOST=host' >> ~/.bashrc
-    echo 'export MONGOID_PORT=27017' >> ~/.bashrc
-    echo 'export MONGOID_USERNAME=user' >> ~/.bashrc
-    echo 'export MONGOID_PASSWORD=pass' >> ~/.bashrc
-    echo 'export MONGOID_DATABASE=db' >> ~/.bashrc
+    # File: ~/.bashrc
+    export MONGOID_HOST=host
+    export MONGOID_PORT=27017
+    export MONGOID_USERNAME=user
+    export MONGOID_PASSWORD=pass
+    export MONGOID_DATABASE=db
     </pre>
 
 Then you can deploy your Rails application to ``~/rails-application/current/``.
