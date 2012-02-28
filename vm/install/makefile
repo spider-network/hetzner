@@ -19,6 +19,7 @@ install:
 	make install_mongodb
 	make install_memcached
 	make install_rvm
+	make install_dotfiles
 
 install_packages:
 	sudo apt-get update
@@ -47,6 +48,10 @@ install_mongodb:
 	sudo cp $(SERVER_CONFIG_VENDOR_DIR)/mongodb-linux-x86_64-$(MONGODB_VERSION)/bin/* /usr/local/bin/
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/mongodb-linux-x86_64-$(MONGODB_VERSION)
 	sudo mkdir -p /data/db/
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/init.d/mongodb /etc/init.d/mongodb
+	sudo cd /etc/init.d/ && sudo chmod +x mongodb
+	sudo cd /etc/init.d/ && sudo update-rc.d mongodb defaults
+	sudo /etc/init.d/mongodb stop && sudo /etc/init.d/mongodb start
 
 install_memcached:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf memcached-$(MEMCACHED_VERSION).tar.gz
@@ -66,6 +71,7 @@ configure_apache:
 	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/apache2/sites-available/rails-application /etc/apache2/sites-available/rails-application
 	sudo rm /etc/apache2/sites-enabled/000-default
 	cd /etc/apache2/sites-enabled/ && sudo ln -s /etc/apache2/sites-available/rails-application rails-application
+	sudo a2enmod headers
 	sudo /etc/init.d/apache2 stop && sudo /etc/init.d/apache2 start
 	mkdir -p ~/rails-application
 
@@ -78,3 +84,8 @@ configure_monit:
 	sudo /etc/init.d/monit stop && sleep 5 && sudo /etc/init.d/monit start
 	sleep 5 && sudo monit monitor all
 	sleep 5 && sudo monit status
+
+install_dotfiles:
+	cp $(SERVER_CONFIG_TEMPLATE_DIR)/dotfiles/profile ~/.profile
+	cp $(SERVER_CONFIG_TEMPLATE_DIR)/dotfiles/profile ~/.bash_profile
+	rm ~/.bash_login
