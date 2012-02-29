@@ -49,9 +49,9 @@ install_mongodb:
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/mongodb-linux-x86_64-$(MONGODB_VERSION)
 	sudo mkdir -p /data/db/
 	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/init.d/mongodb /etc/init.d/mongodb
-	sudo cd /etc/init.d/ && sudo chmod +x mongodb
-	sudo cd /etc/init.d/ && sudo update-rc.d mongodb defaults
-	sudo /etc/init.d/mongodb stop && sudo /etc/init.d/mongodb start
+	cd /etc/init.d/ && sudo chmod +x mongodb
+	cd /etc/init.d/ && sudo update-rc.d mongodb defaults
+	sudo /etc/init.d/mongodb stop; sleep 10; sudo /etc/init.d/mongodb start
 
 install_memcached:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf memcached-$(MEMCACHED_VERSION).tar.gz
