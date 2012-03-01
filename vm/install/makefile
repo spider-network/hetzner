@@ -8,7 +8,6 @@ GIT_VERSION = 1.7.9.2
 RVM_VERSION = 1.10.3
 SPHINX_VERSION = 0.9.9
 REDIS_VERSION = 2.4.8
-MONGODB_VERSION = 2.0.2
 MEMCACHED_VERSION = 1.4.13
 
 install:
@@ -44,14 +43,10 @@ install_redis:
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/redis-$(REDIS_VERSION)
 
 install_mongodb:
-	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf mongodb-linux-x86_64-$(MONGODB_VERSION).tgz
-	sudo cp $(SERVER_CONFIG_VENDOR_DIR)/mongodb-linux-x86_64-$(MONGODB_VERSION)/bin/* /usr/local/bin/
-	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/mongodb-linux-x86_64-$(MONGODB_VERSION)
-	sudo mkdir -p /data/db/
-	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/init.d/mongodb /etc/init.d/mongodb
-	cd /etc/init.d/ && sudo chmod +x mongodb
-	cd /etc/init.d/ && sudo update-rc.d mongodb defaults
-	sudo /etc/init.d/mongodb stop; sleep 10; sudo /etc/init.d/mongodb start
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/apt/ources.list /etc/apt/ources.list
+	sudo apt-get update
+	sudo apt-get install mongodb-10gen
 
 install_memcached:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf memcached-$(MEMCACHED_VERSION).tar.gz
