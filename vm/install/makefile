@@ -44,7 +44,7 @@ install_redis:
 
 install_mongodb:
 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/apt/ources.list /etc/apt/ources.list
+	sudo cp $(SERVER_CONFIG_TEMPLATE_DIR)/etc/apt/sources.list /etc/apt/sources.list
 	sudo apt-get update
 	sudo apt-get install mongodb-10gen
 
