@@ -9,6 +9,7 @@ RVM_VERSION = 1.10.3
 SPHINX_VERSION = 0.9.9
 REDIS_VERSION = 2.4.8
 MEMCACHED_VERSION = 1.4.13
+ELASTICSEARCH_VERSION = 0.19.0
 
 install:
 	make install_packages
@@ -19,6 +20,7 @@ install:
 	make install_memcached
 	make install_rvm
 	make install_dotfiles
+	make install_elasticsearch
 
 install_packages:
 	sudo apt-get update
@@ -85,3 +87,6 @@ install_dotfiles:
 	cp $(SERVER_CONFIG_TEMPLATE_DIR)/dotfiles/profile ~/.profile
 	cp $(SERVER_CONFIG_TEMPLATE_DIR)/dotfiles/profile ~/.bash_profile
 	rm ~/.bash_login
+
+install_elasticsearch:
+	sudo dpkg -i $(SERVER_CONFIG_VENDOR_DIR)/elasticsearch-0.19.0.deb
