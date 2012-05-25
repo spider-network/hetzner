@@ -4,7 +4,8 @@ SERVER_CONFIG_VENDOR_DIR = $(SERVER_CONFIG_DIR)/vm/install/vendor
 SERVER_CONFIG_TEMPLATE_DIR = $(SERVER_CONFIG_DIR)/vm/install/templates
 
 # Programm versions
-GIT_VERSION = 1.7.9.3
+RUBY_VERSION = 1.9.3-p194
+GIT_VERSION = 1.7.10.2
 RVM_VERSION = 1.10.3
 SPHINX_VERSION = 0.9.9
 REDIS_VERSION = 2.4.8
@@ -13,6 +14,8 @@ ELASTICSEARCH_VERSION = 0.19.0
 
 install:
 	make install_packages
+	make install_ruby
+	make install_chef
 	make install_git
 	make install_sphinx
 	make install_redis
@@ -28,6 +31,13 @@ install_packages:
 	sudo apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl-dev libxml2-dev cpu-checker uml-utilities htop bridge-utils apache2 apache2-prefork-dev libapr1-dev libaprutil1-dev lsof tcpdump curl libcurl3-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison openjdk-6-jre-headless ant openjdk-6-jdk subversion vim sendmail wget monit tcsh scons libpcre++-dev libboost-dev xulrunner-1.9.2-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev libboost-date-time-dev mysql-server libmysqlclient-dev php5 php5-mysql tcl8.5 sysstat libevent-dev
 	sudo apt-get -y upgrade
 	sudo apt-get -y dist-upgrade
+
+install_ruby:
+	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf ruby-$(RUBY_VERSION).tar.gz
+	cd $(SERVER_CONFIG_VENDOR_DIR)/ruby-$(RUBY_VERSION) && ./configure && make && sudo make install
+
+install_chef:
+	gem install chef ruby-shadow --no-ri --no-rdoc
 
 install_git:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf git-$(GIT_VERSION).tar.gz
