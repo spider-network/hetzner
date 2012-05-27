@@ -33,6 +33,12 @@ Hetzner example configuration:
 1. Login via SSH
 
     ``ssh root@177.10.0.8 -A``
+    
+Hint (Mac only): Copy public ssh-key with ssh-copy-id to the remote server
+
+    ``brew install ssh-copy-id``
+    
+    ``ssh-copy-id [-i [identity_file]] [user@]machine``
 
 1. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
 will take at least 15 minutes.
