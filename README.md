@@ -34,19 +34,18 @@ Hetzner example configuration:
 
     ``ssh root@177.10.0.8 -A``
     
-Hint (Mac only): Copy public ssh-key with ssh-copy-id to the remote server
+_Hint (Mac only): Copy public ssh-key with ssh-copy-id to the remote server_
 
-    ``brew install ssh-copy-id``
-    
-    ``ssh-copy-id [-i [identity_file]] [user@]machine``
+    brew install ssh-copy-id
+    ssh-copy-id [-i [identity_file]] [user@]machine
 
 1. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
 will take at least 15 minutes.
 
     ``apt-get update && apt-get -y install screen``
 
-    - ``screen``: Start a new screen session. Detach the session with ``ctrl+a d``
-    - ``screen -r``: Reattach to a detached screen process.
+* ``screen``: Start a new screen session. Detach the session with ``ctrl+a d``
+* ``screen -r``: Reattach to a detached screen process.
 
 
 1. Download and extract the setup script (The path must be "/root/hetzner")
