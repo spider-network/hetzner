@@ -41,9 +41,10 @@ Now you can login over SSH without password:
 
     ssh root@177.10.0.8 -A
 
-Update package informations
+Update package informations and install make
 
     apt-get update
+    apt-get install make
     
 ##### 2. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
 will take at least 15 minutes.
