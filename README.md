@@ -20,15 +20,13 @@ Installation and configuration
 
 Hetzner example configuration:
 
-    Ubuntu 12.04 LTS
-    Main Server IP: 177.10.0.8
+* **OS:** Ubuntu 12.04 LTS
+* **Main Server IP:** 177.10.0.8
 
-    Subnet: 79.48.232.8 /29
-    Maske: 255.255.255.248
-    Broadcast: 79.48.232.15
-
-    Available IP addresses:
-    79.48.232.9 bis 79.48.232.14
+* **Subnet:** 79.48.232.8 /29
+    * **Maske:** 255.255.255.248
+    * **Broadcast:** 79.48.232.15
+    * **Available IP addresses:** 79.48.232.9 upto 79.48.232.14
 
 #### Install steps:
 1. Push your public ssh-key to the server and login over SSH
