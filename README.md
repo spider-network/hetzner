@@ -28,15 +28,19 @@ Hetzner example configuration:
     * **Broadcast:** 79.48.232.15
     * **Available IP addresses:** 79.48.232.9 upto 79.48.232.14
 
-#### Install steps:
-1. Push your public ssh-key to the server and login over SSH
-
-    ``ssh root@177.10.0.8 -A``
-    
-_Hint (Mac only): Copy public ssh-key with ssh-copy-id to the remote server_
+### Install steps for host system:
+#####1. Push your public ssh-key to the server and login over SSH
+Copy public ssh-key with ssh-copy-id to the remote server. Please install [homebrew](https://github.com/mxcl/homebrew/wiki/installation) before on your Mac. _(Mac only)_
 
     brew install ssh-copy-id
-    ssh-copy-id [-i [identity_file]] [user@]machine
+    ssh-copy-id -i ~/.ssh/sp-admin.pub root@177.10.0.8
+
+The identity filename can be different on your system. If you are not a Mac user, you should add your public ssh-key to ``~/.ssh/authorized_keys`` on the remote server.
+
+Now you can login over SSH without password:
+
+    ssh root@177.10.0.8 -A
+    
 
 1. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
 will take at least 15 minutes.
@@ -100,7 +104,7 @@ will take at least 15 minutes.
     - ``thor hetzner:host:install:configure_network``
     - ``thor hetzner:host:install:configure_munin``
 
-#### Create and manage VM's:
+### Create and manage VM's:
 
 - Create a new VM (It can take up to 20 minutes. I recommend to do this inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
 
@@ -157,7 +161,7 @@ will take at least 15 minutes.
 
     ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
 
-#### Install VM environment
+### Install VM environment
 
 1. Login via SSH
 
