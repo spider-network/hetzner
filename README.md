@@ -29,7 +29,7 @@ Hetzner example configuration:
     * **Available IP addresses:** 79.48.232.9 upto 79.48.232.14
 
 ### Install steps for host system:
-#####1. Push your public ssh-key to the server and login over SSH
+##### 1. Push your public ssh-key to the server and login over SSH
 Copy public ssh-key with ssh-copy-id to the remote server. Please install [homebrew](https://github.com/mxcl/homebrew/wiki/installation) before on your Mac. _(Mac only)_
 
     brew install ssh-copy-id
@@ -40,26 +40,28 @@ The identity filename can be different on your system. If you are not a Mac user
 Now you can login over SSH without password:
 
     ssh root@177.10.0.8 -A
-    
 
-1. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
+Update package informations
+
+    apt-get update
+    
+##### 2. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
 will take at least 15 minutes.
 
-    ``apt-get update && apt-get -y install screen``
+    apt-get update && apt-get -y install screen
 
 * ``screen``: Start a new screen session. Detach the session with ``ctrl+a d``
 * ``screen -r``: Reattach to a detached screen process.
 
+##### 3. Download and extract the setup script (The path must be "/root/hetzner")
 
-1. Download and extract the setup script (The path must be "/root/hetzner")
+    wget http://www.spider-network.net/downloads/hetzner-host.tar.gz && tar xvf hetzner-host.tar.gz
 
-    ``wget http://www.spider-network.net/downloads/hetzner-host.tar.gz && tar xvf hetzner-host.tar.gz``
+##### 4. Start the installation
 
-1. Start the installation
+    cd /root/hetzner/host/install && make install
 
-    ``cd /root/hetzner/host/install && make install``
-
-    After the installation, you have to logout and login again.
+After the installation, you have to logout and login again.
 
 1. Install missing Gem-Packages
 
