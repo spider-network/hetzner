@@ -5,12 +5,13 @@ SERVER_CONFIG_VENDOR_DIR = $(SERVER_CONFIG_DIR)/host/install/vendor
 # Programm versions
 GIT_VERSION = 1.7.10.3
 RUBY_VERSION = 1.9.3-p194
-RVM_VERSION = 1.8.5
+BUNDLER_VERSION = 1.1.4
 
 install:
 	make install_main_packages
 	make install_git
 	make install_ruby
+	make install_bundler
 	apt-get update
 	apt-get -y upgrade
 	apt-get -y dist-upgrade
@@ -30,13 +31,8 @@ install_ruby:
 	cd $(SERVER_CONFIG_VENDOR_DIR)/ruby-$(RUBY_VERSION) && ./configure && make && make install
 	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/ruby-$(RUBY_VERSION)
 
-install_rvm:
-	cd $(SERVER_CONFIG_VENDOR_DIR) && tar -xvf rvm-$(RVM_VERSION).tar.gz
-	cd $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION) && ./install
-	/usr/local/rvm/bin/rvm install 1.9.2-p290
-	/usr/local/rvm/bin/rvm 1.9.2-p290 --default
-	/usr/local/rvm/bin/rvm gem install bundler --no-rdoc --no-ri
-	rm -rf $(SERVER_CONFIG_VENDOR_DIR)/rvm-$(RVM_VERSION)
+install_bundler:
+	cd $(SERVER_CONFIG_VENDOR_DIR) && gem install bundler-$(BUNDLER_VERSION).gem -l
 
 fix_postfix:
 	# Bug: https://bugs.launchpad.net/ubuntu/+source/postfix/+bug/42947/comments/27
