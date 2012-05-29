@@ -8,18 +8,19 @@ independent systems for development, test, staging and production.
 
 What do you need from Hetzner?
 
-- Root Server _(49€ per month for an [EX4](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 16GB RAM & 2x3TB HDD or 59€ per month for an [EX5](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 24GB RAM & 2x750GB HDD)_
+- Root Server _(49€ per month for an [EX4](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 16GB RAM & 2x3TB HDD or 59€ per month for an [EX4S](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 32GB RAM)_
 - Flexi Pack is necessary to order IP subnet. _(15€ per month)_
-- Subnet /29 _(5.40€ per month)_
+- Subnet /29 _(5.40€ per month)_ with the following setup you can start max 5 VMs.
+- Subnet /28 _(11.20€ per month)_ with the following setup you can start max 13 VMs.
 
-The price of the setup is awesome and you get on top 100GB backup space (SFTP). (Prices from October 2011)
+The price of the setup is awesome and you get on top 100GB backup space (SFTP). (Prices from June 2012)
 
 Installation and configuration
 ------------------------------
 
 Hetzner example configuration:
 
-    Ubuntu 10.04.3 LTS
+    Ubuntu 12.04 LTS
     Main Server IP: 177.10.0.8
 
     Subnet: 79.48.232.8 /29
@@ -30,7 +31,7 @@ Hetzner example configuration:
     79.48.232.9 bis 79.48.232.14
 
 #### Install steps:
-1. Login via SSH
+1. Push your public ssh-key to the server and login over SSH
 
     ``ssh root@177.10.0.8 -A``
     
