@@ -93,8 +93,6 @@ After the installation, you have to logout and login again.
             - 79.48.232.11
             - 79.48.232.12
             - 79.48.232.13
-        ssh_authorized_keys:
-          - ssh-dss AAAAB3NzaC1kc3MAAAEB.../MEwJ7i2F8kYXpcz== michael@voigt
         tools:
           munin:
             htpasswd: Munin:1$vftlsa29t6M
