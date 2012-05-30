@@ -1,6 +1,7 @@
 # Folders
 SERVER_CONFIG_DIR = ~/hetzner
-SERVER_CONFIG_VENDOR_DIR = $(SERVER_CONFIG_DIR)/host/install/vendor
+SERVER_CONFIG_INSTALL_DIR = $(SERVER_CONFIG_DIR)/host/install
+SERVER_CONFIG_VENDOR_DIR = $(SERVER_CONFIG_INSTALL_DIR)/vendor
 
 # Programm versions
 GIT_VERSION = 1.7.10.3
@@ -12,6 +13,7 @@ install:
 	make install_git
 	make install_ruby
 	make install_bundler
+	make install_gems
 	apt-get update
 	apt-get -y upgrade
 	apt-get -y dist-upgrade
@@ -34,9 +36,5 @@ install_ruby:
 install_bundler:
 	cd $(SERVER_CONFIG_VENDOR_DIR) && gem install bundler-$(BUNDLER_VERSION).gem -l
 
-fix_postfix:
-	# Bug: https://bugs.launchpad.net/ubuntu/+source/postfix/+bug/42947/comments/27
-	cp /usr/share/postfix/main.cf.debian /etc/postfix/main.cf
-	newaliases
-	/etc/init.d/postfix restart
-	/etc/init.d/postfix status
+install_gems:
+	cd $(SERVER_CONFIG_INSTALL_DIR) && bundle install --local
