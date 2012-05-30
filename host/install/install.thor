@@ -77,16 +77,6 @@ module Hetzner
         system('/etc/init.d/apache2 stop')
         system('/etc/init.d/apache2 start')
       end
-
-      desc "configure_authorized_keys", "setup authorized ssh keys"
-      def configure_authorized_keys
-        FileUtils.mkdir_p('/root/.ssh', :verbose => true)
-        open('/root/.ssh/authorized_keys', 'w') do |f|
-          config['server']['host']['ssh_authorized_keys'].each do |ssh_key|
-            f.write("#{ssh_key}\n")
-          end
-        end
-      end
     end
 
     class Vm < Thor
