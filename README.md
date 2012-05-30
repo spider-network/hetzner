@@ -62,17 +62,11 @@ will take at least 15 minutes.
 
     cd /root/hetzner/host/install && make install
 
-After the installation, you have to logout and login again.
+##### 5. Adapt installation configuration
 
-1. Install missing Gem-Packages
+    cp /root/hetzner/host/install/config.yml.example /root/hetzner/host/install/config.yml
 
-    ``cd /root/hetzner/host/install && bundle install``
-
-1. Edit used yaml configuration
-
-    ``cp /root/hetzner/host/install/config.yml.example /root/hetzner/host/install/config.yml``
-
-    ``vi /root/hetzner/config.yml``
+    vi /root/hetzner/config.yml
 
     Example:
     <pre>
@@ -98,9 +92,8 @@ After the installation, you have to logout and login again.
             htpasswd: Munin:1$vftlsa29t6M
     </pre>
 
-1. Server configuration (``cd /root/hetzner/host/install``)
+##### 6. Change server network configuration (``cd /root/hetzner/host/install``)
 
-    - ``thor hetzner:host:install:configure_authorized_keys``
     - ``thor hetzner:host:install:configure_hostname``
     - ``thor hetzner:host:install:configure_network``
     - ``thor hetzner:host:install:configure_munin``
