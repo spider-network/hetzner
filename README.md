@@ -66,7 +66,7 @@ Update package informations and install make
 
 ##### 6. Change server network configuration and setup munin monitoring tool
 
-    cd /root/hetzner/host/install/chef && chef-solo -c solo.rb -j node.json
+    cd /root/hetzner/host/install/chef && chef-solo -c solo.rb
 
 ### Create and manage VM's:
 
