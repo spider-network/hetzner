@@ -46,17 +46,16 @@ Update package informations and install make
     apt-get update
     apt-get install make
     
-##### 2. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
-will take at least 15 minutes.
+##### 2. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it will take at least 15 minutes.
 
     apt-get update && apt-get -y install screen
 
 * ``screen``: Start a new screen session. Detach the session with ``ctrl+a d``
 * ``screen -r``: Reattach to a detached screen process.
 
-##### 3. Download and extract the setup script (The path must be "/root/hetzner")
+##### 3. Download and extract the setup script
 
-    wget http://www.spider-network.net/downloads/hetzner-host.tar.gz && tar xvf hetzner-host.tar.gz
+    cd /root && wget http://www.spider-network.net/downloads/hetzner-host.tar.gz && tar xvf hetzner-host.tar.gz
 
 ##### 4. Start the installation
 
