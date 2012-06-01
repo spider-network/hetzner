@@ -46,64 +46,27 @@ Update package informations and install make
     apt-get update
     apt-get install make
     
-##### 2. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it
-will take at least 15 minutes.
+##### 2. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it will take at least 15 minutes.
 
     apt-get update && apt-get -y install screen
 
 * ``screen``: Start a new screen session. Detach the session with ``ctrl+a d``
 * ``screen -r``: Reattach to a detached screen process.
 
-##### 3. Download and extract the setup script (The path must be "/root/hetzner")
+##### 3. Download and extract the setup script
 
-    wget http://www.spider-network.net/downloads/hetzner-host.tar.gz && tar xvf hetzner-host.tar.gz
+    cd /root && wget http://www.spider-network.net/downloads/hetzner-host.tar.gz && tar xvf hetzner-host.tar.gz
 
 ##### 4. Start the installation
 
     cd /root/hetzner/host/install && make install
 
-After the installation, you have to logout and login again.
+##### 5. Adapt installation configuration
 
-1. Install missing Gem-Packages
 
-    ``cd /root/hetzner/host/install && bundle install``
+##### 6. Change server network configuration and setup munin monitoring tool
 
-1. Edit used yaml configuration
-
-    ``cp /root/hetzner/host/install/config.yml.example /root/hetzner/host/install/config.yml``
-
-    ``vi /root/hetzner/config.yml``
-
-    Example:
-    <pre>
-    server:
-      host:
-        ip: 177.10.0.8
-        hostname: server-001.domain.tpl
-        subnet:
-          ip: 79.48.232.8
-          maske: 255.255.255.248
-          broadcast: 79.48.232.15
-          net: 177.10.0.0
-          gateway: 79.48.232.14
-          dns: '213.133.98.98 213.133.99.99 213.133.100.100'
-          ips:
-            - 79.48.232.9
-            - 79.48.232.10
-            - 79.48.232.11
-            - 79.48.232.12
-            - 79.48.232.13
-        tools:
-          munin:
-            htpasswd: Munin:1$vftlsa29t6M
-    </pre>
-
-1. Server configuration (``cd /root/hetzner/host/install``)
-
-    - ``thor hetzner:host:install:configure_authorized_keys``
-    - ``thor hetzner:host:install:configure_hostname``
-    - ``thor hetzner:host:install:configure_network``
-    - ``thor hetzner:host:install:configure_munin``
+    cd /root/hetzner/host/install/chef && chef-solo -c solo.rb
 
 ### Create and manage VM's:
 
