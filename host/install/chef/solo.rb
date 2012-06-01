@@ -1,0 +1,1 @@
+cookbook_path "/root/hetzner/host/install/chef/cookbooks"
