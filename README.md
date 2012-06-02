@@ -62,10 +62,11 @@ Update package informations and install make
 
 ##### 5. Adapt installation configuration
 
-[link](spider-network/hetzner/blob/<$curBranch>/host/install/config/node.EXAMPLE.json)
-
     cd /root/hetzner/host/install && cp config/node.EXAMPLE.json config/node.server-001.json
     vi /root/hetzner/host/install/config/node.server-001.json
+
+[See example config](host/install/config/node.EXAMPLE.json)
+
 
 ##### 6. Change server network configuration and setup munin monitoring tool
 
