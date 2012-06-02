@@ -62,6 +62,8 @@ Update package informations and install make
 
 ##### 5. Adapt installation configuration
 
+[link](spider-network/hetzner/blob/<$curBranch>/host/install/config/node.EXAMPLE.json)
+
     cd /root/hetzner/host/install && cp config/node.EXAMPLE.json config/node.server-001.json
     vi /root/hetzner/host/install/config/node.server-001.json
 
