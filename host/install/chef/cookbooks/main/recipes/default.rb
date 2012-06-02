@@ -22,11 +22,21 @@ execute "restart hostname service" do
 end
 
 
-###################
-# configure network
-template "/etc/network/interfaces" do
+###########################
+# configure network for vms
+execute "copy origin interface configuration" do
+  unless File.exists?("/etc/network/_interfaces-origin")
+    command "cp /etc/network/interfaces /etc/network/_interfaces-origin"
+  end
+end
+
+template "/etc/network/_interfaces-vms" do
   source "etc/network/interfaces.erb"
   mode "0644"
+end
+
+execute "copy origin interface configuration" do
+  command "rm /etc/network/interfaces && cat /etc/network/_interfaces-origin /etc/network/_interfaces-vms >> /etc/network/interfaces"
 end
 
 template "/etc/sysctl.conf" do
@@ -37,6 +47,15 @@ end
 execute "restart network service" do
   command "/etc/init.d/networking restart"
   command "sysctl -p"
+end
+
+template "/etc/libvirt/qemu.conf" do
+  source "/etc/libvirt/qemu.conf.erb"
+  mode "0644"
+end
+
+execute "restart libvirt service" do
+  command "service libvirt-bin restart"
 end
 
 
