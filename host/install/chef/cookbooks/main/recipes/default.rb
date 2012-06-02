@@ -47,17 +47,32 @@ if node[:server][:tools][:munin][:install]
   package "munin-node"
   package "munin-plugins-extra"
 
+  execute "restart munin service" do
+    command "service munin-node restart"
+  end
+
   template "/etc/munin/munin.conf" do
     source "etc/munin/munin.conf.erb"
     mode "0644"
   end
 
-  execute "stop munin service" do
-    command "/etc/init.d/munin-node stop"
+  # enable memory monitoring
+  link "/etc/munin/plugins/memory" do
+    to "/usr/share/munin/plugins/memory"
   end
 
-  execute "start munin service" do
-    command "/etc/init.d/munin-node start"
+  # enable open_files monitoring
+  link "/etc/munin/plugins/open_files" do
+    to "/usr/share/munin/plugins/open_files"
+  end
+
+  execute "restart munin service" do
+    command "service munin-node restart"
+  end
+
+  execute "run munin-cron" do
+    command "/usr/bin/munin-cron"
+    user "munin"
   end
 
   execute "generate munin-htpasswd" do
