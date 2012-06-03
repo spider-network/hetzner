@@ -10,8 +10,8 @@ What do you need from Hetzner?
 
 - Root Server _(49€ per month for an [EX4](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 16GB RAM & 2x3TB HDD or 59€ per month for an [EX4S](http://www.hetzner.de/hosting/produktmatrix/rootserver-produktmatrix-ex) with 32GB RAM)_
 - Flexi Pack is necessary to order IP subnet. _(15€ per month)_
-- Subnet /29 _(5.40€ per month)_ with the following setup you can start max 5 VMs.
-- Subnet /28 _(11.20€ per month)_ with the following setup you can start max 13 VMs.
+- Subnet /29 _(5.40€ per month)_ you can start max 5 VMs with the following setup.
+- Subnet /28 _(11.20€ per month)_ you can start max 13 VMs with the following setup.
 
 The price of the setup is awesome and you get on top 100GB backup space (SFTP). (Prices from June 2012)
 
