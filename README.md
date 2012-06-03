@@ -129,57 +129,8 @@ Update package informations and install make
 
     ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
 
-### Install VM environment
-
-1. Login via SSH
-
-    ``ssh server@79.48.232.9 -A``
-
-1. Download and extract the setup script (The path must be "~/hetzner")
-
-    ``wget http://www.spider-network.net/downloads/hetzner-vm.tar.gz && tar xvf hetzner-vm.tar.gz``
-
-1. Start the installation (I recommend to do this inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
-
-    ``cd ~/hetzner/vm/install && make install``
-
-    After the installation, you have to logout and login again.
-
-1. Install missing Gem-Packages
-
-    ``cd ~/hetzner/vm/install && bundle install``
-
-1. Install Phusion Passenger
-
-    ``passenger-install-apache2-module``
-
-1. Define rails environment
-
-    ``echo 'export RAILS_ENV=production' >> ~/.bashrc``
-
-1. Adapt Apache configuration
-
-    ``cd ~/hetzner/vm/install && make configure_apache``
-
-1. Configure Monit
-
-    ``cd ~/hetzner/vm/install && make configure_monit``
-
-1. Config MongoDB credentials
-
-    <pre>
-    # File: ~/.bashrc
-    export MONGOID_HOST=localhost
-    export MONGOID_PORT=27017
-    export MONGOID_USERNAME=user
-    export MONGOID_PASSWORD=pass
-    export MONGOID_DATABASE=db
-    </pre>
-
-Then you can deploy your Rails application to ``~/rails-application/current/``.
-
 Contributing and Support
 ------------------------
 If you have any suggestions or criticism write me an e-mail [michael.voigt@spider-network.net](mailto:michael.voigt@spider-network.net)
 or create an issue. If you need help just contact me. I will always support the latest Ubuntu LTS ("Long Term Support")
-version, which is currently "Ubuntu 10.04 LTS".
+version, which is currently "Ubuntu 12.04 LTS".
