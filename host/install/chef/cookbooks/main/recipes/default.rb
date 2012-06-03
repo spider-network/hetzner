@@ -24,8 +24,8 @@ end
 
 ###########################
 # configure network for vms
-execute "copy origin interface configuration" do
-  unless File.exists?("/etc/network/_interfaces-origin")
+unless File.exists?("/etc/network/_interfaces-origin")
+  execute "copy origin interface configuration" do
     command "cp /etc/network/interfaces /etc/network/_interfaces-origin"
   end
 end
@@ -44,8 +44,11 @@ template "/etc/sysctl.conf" do
   mode "0644"
 end
 
-execute "restart network service" do
+execute "restart network service 1" do
   command "/etc/init.d/networking restart"
+end
+
+execute "restart network service 2" do
   command "sysctl -p"
 end
 

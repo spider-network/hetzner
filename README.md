@@ -44,7 +44,7 @@ Now you can login over SSH without password:
 Update package informations and install make
 
     apt-get update && apt-get install make
-    
+
 ##### 2. I recommend to run the installation in a [screen session](http://de.wikipedia.org/wiki/GNU_Screen), because it will take at least 15 minutes.
 
     apt-get update && apt-get -y install screen
@@ -87,47 +87,15 @@ Update package informations and install make
     :cpus      => 4,         # VM CPU cores (Default: 4)
     :ram       => 4096,      # VM RAM (Default: 4096 MB)
     :swap      => 1024,      # VM Swap (Default: 1024 MB)
-    :hdd       => 20480      # VM HDD (Default: 20480 MB)
+    :hdd       => 51200      # VM HDD (Default: 51200 MB)
     </pre>
 
-    - Increase IO performance (add: ``cache='writeback'``):
-
-        ``thor hetzner:host:vm:edit --name=vm-001``
-
-        ```xml
-        <disk type='file' device='disk'>
-          <driver name='qemu' type='qcow2' cache='writeback'/>
-          <source file='/root/vms/vm-002/tmphJhs3T.qcow2'/>
-          <target dev='hda' bus='ide'/>
-        </disk>
-        ```
-        Don't forget to restart the VM.
-
-- Show all VM's and the status (running, shut off)
-
-    ``thor hetzner:host:vm:list``
-
-- Stop the given VM
-
-    ``thor hetzner:host:vm:stop --name=vm-001``
-
-- Start the given VM
-
-    ``thor hetzner:host:vm:start --name=vm-001``
-
-- Create a backup (dump)
-
-    ``thor hetzner:host:vm:backup --name=vm-001``
-
-- Show all backups from the given VM
-
-    ``thor hetzner:host:vm:backups --name=vm-001``
-
-- Restore the VM from backup dump
-
-    ``thor hetzner:host:vm:stop --name=vm-001``
-
-    ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
+- Show all VM's and the status (running, shut off): ``thor hetzner:host:vm:list``
+- Stop the given VM: ``thor hetzner:host:vm:stop --name=vm-001``
+- Start the given VM: ``thor hetzner:host:vm:start --name=vm-001``
+- Create a backup (dump): ``thor hetzner:host:vm:backup --name=vm-001``
+- Show all backups from the given VM: ``thor hetzner:host:vm:backups --name=vm-001``
+- Restore the VM from backup dump: ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
 
 Contributing and Support
 ------------------------

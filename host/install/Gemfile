@@ -1,7 +1,6 @@
 source :rubygems
 
 gem 'thor', '0.15.2'
-gem 'erubis', '2.7.0'
 gem 'activesupport', '3.2.3'
 gem 'i18n', '0.6.0'
 gem 'chef'
