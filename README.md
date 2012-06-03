@@ -78,7 +78,7 @@ Update package informations and install make
 
 - Create a new VM (It can take up to 20 minutes. I recommend to do this inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
 
-    ``thor hetzner:host:vm:create --ip=79.48.232.9 --name=vm-001 --user-pass=password``
+    ``thor hetzner:host:vm:create --config=node.server-001.json --ip=79.48.232.9 --name=vm-001 --user-pass=password``
 
     - Options:
     <pre>
