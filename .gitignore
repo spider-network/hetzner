@@ -1,4 +1,2 @@
 .DS_Store
-config.yml
 tarball/hetzner-host.tar.gz
-tarball/hetzner-vm.tar.gz

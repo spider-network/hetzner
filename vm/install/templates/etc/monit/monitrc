@@ -1,8 +1,0 @@
-# Monit configuration
-set daemon 30
-    with start delay 120
-
-set httpd port 2812
-  allow localhost
-
-include /etc/monit/conf.d/*.monitrc
