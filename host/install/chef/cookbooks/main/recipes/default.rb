@@ -5,6 +5,10 @@ template "/root/.profile" do
   mode "0644"
 end
 
+# enable memory monitoring
+link "/root/hetzner.thor" do
+  to "/root/hetzner/host/install/hetzner.thor"
+end
 
 ####################
 # configure hostname

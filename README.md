@@ -74,15 +74,14 @@ Update package informations and install make
 
 ### Create and manage VM's:
 
-    cd /root/hetzner/host/install
-
 - Create a new VM (It can take up to 20 minutes. I recommend to do this inside a [screen session](http://de.wikipedia.org/wiki/GNU_Screen) (see above).)
 
-    ``thor hetzner:host:vm:create --config=node.server-001.json --ip=79.48.232.9 --name=vm-001 --user-pass=password``
+    ``thor hetzner:vm:create --config=node.server-001.json --ip=79.48.232.9 --name=vm-001 --user-pass=password``
 
     - Options:
     <pre>
     :name      => :required, # Name of the VM. e.g. vm-001
+    :config    => :required, # Json configuration file
     :user_name => 'server',  # Linux user (Default: server)
     :user_pass => :required, # Password for the Linux user
     :ip        => :required, # VM IP, one of the available IP's from your subnet. e.g. 79.48.232.9
@@ -92,12 +91,12 @@ Update package informations and install make
     :hdd       => 51200      # VM HDD (Default: 51200 MB)
     </pre>
 
-- Show all VM's and the status (running, shut off): ``thor hetzner:host:vm:list``
-- Stop the given VM: ``thor hetzner:host:vm:stop --name=vm-001``
-- Start the given VM: ``thor hetzner:host:vm:start --name=vm-001``
-- Create a backup (dump): ``thor hetzner:host:vm:backup --name=vm-001``
-- Show all backups from the given VM: ``thor hetzner:host:vm:backups --name=vm-001``
-- Restore the VM from backup dump: ``thor hetzner:host:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
+- Show all VM's and the status (running, shut off): ``thor hetzner:vm:list``
+- Stop the given VM: ``thor hetzner:vm:stop --name=vm-001``
+- Start the given VM: ``thor hetzner:vm:start --name=vm-001``
+- Create a backup (dump): ``thor hetzner:vm:backup --name=vm-001``
+- Show all backups from the given VM: ``thor hetzner:vm:backups --name=vm-001``
+- Restore the VM from backup dump: ``thor hetzner:vm:restore --file=vm_backup_20111012-1247 --name=vm-001``
 
 Contributing and Support
 ------------------------
