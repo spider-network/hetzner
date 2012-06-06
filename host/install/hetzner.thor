@@ -96,29 +96,32 @@ module Hetzner
       run "virsh shutdown #{options[:name]}"
     end
 
-    desc "create_snapshot", "Create snapshot"
-    method_options(:name => :required)
-    def create_snapshot
-      while `virsh -c qemu:///system domstate #{options[:name]}`.squish != 'shut off'
-        print 'try to shutdown...'
-        invoke :stop
-        sleep(10)
+    class Snapshot < Thor
+      include Actions
+
+      desc "create", "Create snapshot"
+      method_options(:name => :required)
+      def create
+        while `virsh -c qemu:///system domstate #{options[:name]}`.squish != 'shut off'
+          print 'try to shutdown...'
+          invoke :stop
+          sleep(10)
+        end
+        run "virsh snapshot-create #{options[:name]}"
+        invoke :start
       end
-      run "virsh snapshot-create #{options[:name]}"
-      invoke :start
-    end
 
-    desc "restore_snapshot", "Restore snapshot"
-    method_options(:name => :required, :snapshot_name => :required)
-    def restore_snapshot
-      run "virsh snapshot-revert #{options[:name]} #{options[:snapshot_name]}"
-    end
+      desc "restore", "Restore snapshot"
+      method_options(:name => :required, :snapshot_name => :required)
+      def restore
+        run "virsh snapshot-revert #{options[:name]} #{options[:snapshot_name]}"
+      end
 
-    desc "list_snapshots", "List snapshots"
-    method_options(:name => :required)
-    def list_snapshot
-      run "virsh snapshot-list #{options[:name]}"
+      desc "list", "List snapshots"
+      method_options(:name => :required)
+      def list
+        run "virsh snapshot-list #{options[:name]}"
+      end
     end
-
   end
 end
