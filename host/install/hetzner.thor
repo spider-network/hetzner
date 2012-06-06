@@ -1,4 +1,5 @@
 require 'json'
+require 'active_support/core_ext'
 
 module Hetzner
   class Vm < Thor
@@ -95,27 +96,29 @@ module Hetzner
       run "virsh shutdown #{options[:name]}"
     end
 
-    desc "backup", "backup the given VM"
+    desc "create_snapshot", "Create snapshot"
     method_options(:name => :required)
-    def backup
-      run "mkdir -p /root/backups/vms/#{options[:name]}"
-      backup_name = "vm_backup_#{Time.new.strftime('%Y%m%d-%H%M')}"
-      run "virsh save #{options[:name]} /root/backups/vms/#{options[:name]}/#{backup_name}"
+    def create_snapshot
+      while `virsh -c qemu:///system domstate #{options[:name]}`.squish != 'shut off'
+        print 'try to shutdown...'
+        invoke :stop
+        sleep(10)
+      end
+      run "virsh snapshot-create #{options[:name]}"
       invoke :start
     end
 
-    desc "backups", "get list of backups for the given VM"
-    method_options(:name => :required)
-    def backups
-      run "mkdir -p /root/backups/vms/#{options[:name]}"
-      run "ls -lh /root/backups/vms/#{options[:name]}/"
+    desc "restore_snapshot", "Restore snapshot"
+    method_options(:name => :required, :snapshot_name => :required)
+    def restore_snapshot
+      run "virsh snapshot-revert #{options[:name]} #{options[:snapshot_name]}"
     end
 
-    desc "restore", "restore the given VM dump"
-    method_options(:name => :required, :file => :required)
-    def restore
-      run "virsh shutdown #{options[:name]}"
-      run "virsh restore /root/backups/vms/#{options[:name]}/#{options[:file]}"
+    desc "list_snapshots", "List snapshots"
+    method_options(:name => :required)
+    def list_snapshot
+      run "virsh snapshot-list #{options[:name]}"
     end
+
   end
 end
