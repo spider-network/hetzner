@@ -104,11 +104,11 @@ module Hetzner
       def create
         while `virsh -c qemu:///system domstate #{options[:name]}`.squish != 'shut off'
           print 'try to shutdown...'
-          invoke :stop
+          invoke 'hetzner:vm:stop'
           sleep(10)
         end
         run "virsh snapshot-create #{options[:name]}"
-        invoke :start
+        invoke 'hetzner:vm:start'
       end
 
       desc "restore", "Restore snapshot"
