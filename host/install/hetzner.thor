@@ -5,6 +5,26 @@ module Hetzner
   class Vm < Thor
     include Actions
 
+    desc "ips", "show IPs"
+    method_options(:config => :string)
+    def ips
+      file = if options[:config].present? && File.exists?(options[:config])
+        options[:config]
+      elsif ENV['SERVER_IDENTIFIER'].present? && File.exists?(config_file_1 = "/root/hetzner/host/install/config/node.#{ENV['SERVER_IDENTIFIER']}.json")
+        config_file_1
+      elsif ENV['SERVER_IDENTIFIER'].present? && File.exists?(config_file_2 = "/root/hetzner-config/node.#{ENV['SERVER_IDENTIFIER']}.json")
+        config_file_2
+      else
+        say("No configuration (node.SERVER_IDENTIFIER.json) found in /root/hetzner/host/install/config or /root/hetzner-config\n", Color::RED)
+        exit
+      end
+
+      config = JSON.parse(File.read(file))
+      config['server']['host']['subnet']['ips'].each do |ip|
+        puts "- #{ip}"
+      end
+    end
+
     desc "create", "create a new VM"
     method_options(
       :name      => :required, # e.g. vm-001
