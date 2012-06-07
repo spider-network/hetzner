@@ -8,34 +8,20 @@ module Hetzner
     desc "ips", "show IPs"
     method_options(:config => :string)
     def ips
-      file = if options[:config].present? && File.exists?(options[:config])
-        options[:config]
-      elsif ENV['SERVER_IDENTIFIER'].present? && File.exists?(config_file_1 = "/root/hetzner/host/install/config/node.#{ENV['SERVER_IDENTIFIER']}.json")
-        config_file_1
-      elsif ENV['SERVER_IDENTIFIER'].present? && File.exists?(config_file_2 = "/root/hetzner-config/node.#{ENV['SERVER_IDENTIFIER']}.json")
-        config_file_2
-      else
-        say("No configuration (node.SERVER_IDENTIFIER.json) found in /root/hetzner/host/install/config or /root/hetzner-config\n", Color::RED)
-        exit
-      end
-
-      config = JSON.parse(File.read(file))
-      config['server']['host']['subnet']['ips'].each do |ip|
-        puts "- #{ip}"
+      config = load_config(options[:config])
+      config['server']['host']['subnet']['vms'].each do |key, conf|
+        puts "#{key}: #{conf['ip']} (user: #{conf['user']}, pass: #{conf['pass']})"
       end
     end
 
     desc "create", "create a new VM"
     method_options(
-      :name      => :required, # e.g. vm-001
-      :user_name => 'server',
-      :user_pass => :required, # e.g. NE36D2
-      :ip        => :required, # e.g. 79.48.232.9
+      :name      => :required,
       :cpus      => 4,
       :ram       => 4096,
       :swap      => 1024,
       :hdd       => 51200,
-      :config    => :required
+      :config    => :string
     )
     def create
       run "mkdir -p /root/vms"
@@ -45,24 +31,20 @@ module Hetzner
         exit
       end
 
-      file = File.join('/root', 'hetzner', 'host', 'install', 'config', options[:config])
-      unless File.exists?(file)
-
-        file = options[:config]
-        unless File.exists?(file)
-          say("Can not find configuration '#{file}'", Color::RED)
-          exit
-        end
-
-      end
-
-      config = JSON.parse(File.read(file))
+      config = load_config(options[:config])
 
       vm_network_gateway  = config['server']['host']['subnet']['gateway']   # e.g. 79.48.232.14
       vm_network_mask     = config['server']['host']['subnet']['maske']     # e.g. 255.255.255.248
       vm_network_net      = config['server']['host']['subnet']['net']       # e.g. 176.9.0.0
       vm_network_bcast    = config['server']['host']['subnet']['broadcast'] # e.g. 176.9.0.31
       vm_network_dns      = config['server']['host']['subnet']['dns']       # e.g. '213.133.98.98 213.133.99.99 213.133.100.100'
+
+      vm_config           = config['server']['host']['subnet']['vms'][options[:name]]
+
+      if vm_config.blank?
+        say("No VM configuration found (config['server']['host']['subnet']['vms']['#{options[:name]}']).", Color::RED)
+        exit
+      end
 
       shell_cmd = %{ubuntu-vm-builder kvm precise -v  \
         --cpus=#{options[:cpus]} \
@@ -73,7 +55,7 @@ module Hetzner
         --libvirt=qemu:///system \
         --flavour=server \
         --hostname=#{options[:name]} \
-        --ip=#{options[:ip]} \
+        --ip=#{vm_config['ip']} \
         --mask=#{vm_network_mask} \
         --net=#{vm_network_net} \
         --bcast=#{vm_network_bcast} \
@@ -82,8 +64,8 @@ module Hetzner
         --mirror=http://de.archive.ubuntu.com/ubuntu \
         --components='main,universe' \
         --addpkg='openssh-server,acpid,htop,wget,screen' \
-        --user=#{options[:user_name]} \
-        --pass=#{options[:user_pass]} \
+        --user=#{vm_config['user']} \
+        --pass=#{vm_config['pass']} \
         --timezone='CET' \
         --dest=/root/vms/#{options[:name]}}
       run(shell_cmd)
@@ -141,6 +123,23 @@ module Hetzner
       method_options(:name => :required)
       def list
         run "virsh snapshot-list #{options[:name]}"
+      end
+    end
+
+    no_tasks do
+      def load_config(config)
+        file = if options[:config].present? && File.exists?(options[:config])
+          options[:config]
+        elsif ENV['SERVER_IDENTIFIER'].present? && File.exists?(config_file_1 = "/root/hetzner/host/install/config/node.#{ENV['SERVER_IDENTIFIER']}.json")
+          config_file_1
+        elsif ENV['SERVER_IDENTIFIER'].present? && File.exists?(config_file_2 = "/root/hetzner-config/node.#{ENV['SERVER_IDENTIFIER']}.json")
+          config_file_2
+        else
+          say("No configuration (node.SERVER_IDENTIFIER.json) found in /root/hetzner/host/install/config or /root/hetzner-config\n", Color::RED)
+          exit
+        end
+
+        JSON.parse(File.read(file))
       end
     end
   end
