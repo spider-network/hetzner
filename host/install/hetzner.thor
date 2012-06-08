@@ -5,9 +5,9 @@ module Hetzner
   class Vm < Thor
     include Actions
 
-    desc "ips", "show IPs"
+    desc "configs", "show VM configs"
     method_options(:config => :string)
-    def ips
+    def configs
       config = load_config(options[:config])
       config['server']['host']['subnet']['vms'].each do |key, conf|
         puts "#{key}: #{conf['ip']} (user: #{conf['user']}, pass: #{conf['pass']})"
@@ -104,13 +104,11 @@ module Hetzner
       desc "create", "Create snapshot"
       method_options(:name => :required)
       def create
-        while `virsh -c qemu:///system domstate #{options[:name]}`.squish != 'shut off'
-          print 'try to shutdown...'
-          invoke 'hetzner:vm:stop'
-          sleep(10)
+        if `virsh -c qemu:///system domstate #{options[:name]}`.squish != 'shut off'
+          say("Please shutdown VM #{options[:name]}} before you create a snapshot (thor hetzner:vm:stop --name=#{options[:name]}).", Color::RED)
+          exit
         end
         run "virsh snapshot-create #{options[:name]}"
-        invoke 'hetzner:vm:start'
       end
 
       desc "restore", "Restore snapshot"

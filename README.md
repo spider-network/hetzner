@@ -89,7 +89,7 @@ Update package informations and install make
     </pre>
 
 - ``thor hetzner:vm:list``
-- ``thor hetzner:vm:ips``
+- ``thor hetzner:vm:configs``
 - ``thor hetzner:vm:stop --name=NAME``
 - ``thor hetzner:vm:start --name=NAME``
 - ``thor hetzner:vm:edit --name=NAME``
