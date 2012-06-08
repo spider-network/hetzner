@@ -63,7 +63,7 @@ module Hetzner
         --dns=#{vm_network_dns} \
         --mirror=http://de.archive.ubuntu.com/ubuntu \
         --components='main,universe' \
-        --addpkg='openssh-server,acpid,htop,wget,screen' \
+        --addpkg='openssh-server,acpid,htop,wget,screen,make' \
         --user=#{vm_config['user']} \
         --pass=#{vm_config['pass']} \
         --timezone='CET' \
