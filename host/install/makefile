@@ -14,13 +14,11 @@ install:
 	make install_ruby
 	make install_bundler
 	make install_gems
-	apt-get update
-	apt-get -y upgrade
-	apt-get -y dist-upgrade
 
 install_main_packages:
 	apt-get update
 	apt-get -y upgrade
+	apt-get -y dist-upgrade
 	apt-get -y install screen build-essential make g++ patch gawk zlib1g zlib1g-dev libssl0.9.8 libssl-dev libxml2-dev cpu-checker uml-utilities ubuntu-vm-builder qemu-kvm libvirt-bin virt-top virt-manager htop bridge-utils apache2 apache2.2-common lsof tcpdump curl libcurl4-openssl-dev libexpat1-dev imagemagick openssl libreadline6 libreadline6-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison vim sysstat
 
 install_git:

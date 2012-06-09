@@ -97,6 +97,12 @@ Update package informations and install make
 - ``thor hetzner:vm:snapshot:list --name=NAME``
 - ``thor hetzner:vm:snapshot:restore --name=NAME --snapshot-name=SNAPSHOT_NAME``
 
+### Setup VM basics:
+Install git, ruby and chef inside the VM.
+
+    cd ~/ && wget http://www.spider-network.net/downloads/hetzner-vm-basics.tar.gz && tar xvf hetzner-vm-basics.tar.gz
+    cd ~/hetzner-vm-basics && make
+
 Contributing and Support
 ------------------------
 If you have any suggestions or criticism write me an e-mail [michael.voigt@spider-network.net](mailto:michael.voigt@spider-network.net)
