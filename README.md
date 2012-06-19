@@ -103,7 +103,7 @@ Install git, ruby and chef inside the VM.
 **Login to the VM and execute the following commands:**
 
     cd ~/ && wget http://www.spider-network.net/downloads/hetzner-vm-basics.tar.gz && tar xvf hetzner-vm-basics.tar.gz
-    cd ~/hetzner-vm-basics && make
+    cd ~/hetzner-vm-basics && make && rm -rf ~/hetzner-vm-basics*
 
 Contributing and Support
 ------------------------
