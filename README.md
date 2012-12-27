@@ -98,12 +98,15 @@ Update package informations and install make
 - ``thor hetzner:vm:snapshot:restore --name=NAME --snapshot-name=SNAPSHOT_NAME``
 
 ### Setup VM basics:
-Install git, ruby and chef inside the VM.
+Install git, rvm, ruby and chef inside the VM.
 
 **Login to the VM and execute the following commands:**
 
-    cd ~/ && wget http://www.spider-network.net/downloads/hetzner-vm-basics.tar.gz && tar xvf hetzner-vm-basics.tar.gz
-    cd ~/hetzner-vm-basics && make && rm -rf ~/hetzner-vm-basics*
+    sudo apt-get update && sudo apt-get install -y curl
+    curl -L https://raw.github.com/spider-network/ubuntu-vm-basics/master/fetch |bash
+    cd ~/ubuntu-vm-basics && ./installer
+
+For more infos see my other github project [ubuntu-vm-basics](https://github.com/spider-network/ubuntu-vm-basics).
 
 Contributing and Support
 ------------------------
